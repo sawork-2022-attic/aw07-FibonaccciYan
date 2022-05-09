@@ -1,0 +1,10 @@
+{
+  "simulation": "gatlingTest.LoadTestSimulation",
+  "simulationId": "loadtestsimulation",
+  "start": 1648379143959,
+  "description": "",
+  "scenarios": ["JD Pos Load Test"],
+  "assertions": [
+
+  ]
+}
