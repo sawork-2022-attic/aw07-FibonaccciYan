@@ -67,4 +67,10 @@ public class PosController {
         posService.newCart();
         return "redirect:/";
     }
+
+    @GetMapping("/checkout")
+    public String checkout(Model model) {
+        posService.checkout(cart);
+        return "redirect:/";
+    }
 }

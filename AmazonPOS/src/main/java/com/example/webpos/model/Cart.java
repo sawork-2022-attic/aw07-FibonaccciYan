@@ -46,6 +46,10 @@ public class Cart implements Serializable {
         return null;
     }
 
+    public List<Item> getItems() {
+        return items;
+    }
+
     public double getTotal() {
         double total = 0;
         for (int i = 0; i < items.size(); i++) {

@@ -1,20 +1,26 @@
 package com.example.webpos.biz;
 
+import com.example.order.Order;
 import com.example.webpos.db.PosDB;
 import com.example.webpos.model.Cart;
 import com.example.webpos.model.Item;
 import com.example.webpos.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class PosServiceImp implements PosService, Serializable {
 
     private PosDB posDB;
+
+    @Autowired
+    private StreamBridge streamBridge;
 
     @Autowired
     public void setPosDB(PosDB posDB) {
@@ -25,7 +31,7 @@ public class PosServiceImp implements PosService, Serializable {
     public Cart getCart() {
 
         Cart cart = posDB.getCart();
-        if (cart == null){
+        if (cart == null) {
             cart = this.newCart();
         }
         return cart;
@@ -44,12 +50,17 @@ public class PosServiceImp implements PosService, Serializable {
     @Override
     public void checkout(Cart cart) {
 
+        Order order = new Order(UUID.randomUUID().toString(), cart.getItems());
+        System.out.println(order.getStatus() + " " + order.getUuid());
+
+        streamBridge.send("", order);
+
     }
 
     @Override
     public double total(Cart cart) {
         double sum = 0;
-        for(Item item: cart.getItems()) {
+        for (Item item : cart.getItems()) {
             sum += item.getQuantity() * item.getProduct().getPrice();
         }
 
@@ -67,7 +78,7 @@ public class PosServiceImp implements PosService, Serializable {
         Product product = posDB.getProduct(productId);
         if (product == null) return false;
 
-        if(this.getCart().containItem(new Item(product, amount))) {
+        if (this.getCart().containItem(new Item(product, amount))) {
             this.getCart().getItem(new Item(product, amount)).addQuantity(amount);
         } else {
             this.getCart().addItem(new Item(product, amount));
@@ -80,7 +91,7 @@ public class PosServiceImp implements PosService, Serializable {
         Product product = posDB.getProduct(productId);
         if (product == null) return false;
 
-        if(this.getCart().removeItem(new Item(product, amount)) == false) {
+        if (this.getCart().removeItem(new Item(product, amount)) == false) {
             this.delete(productId);
         }
         return true;
