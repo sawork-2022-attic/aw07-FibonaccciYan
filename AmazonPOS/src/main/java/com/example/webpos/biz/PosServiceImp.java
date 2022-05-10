@@ -1,10 +1,10 @@
 package com.example.webpos.biz;
 
-import com.example.order.Order;
+import com.example.model.Cart;
+import com.example.model.Item;
+import com.example.model.Order;
+import com.example.model.Product;
 import com.example.webpos.db.PosDB;
-import com.example.webpos.model.Cart;
-import com.example.webpos.model.Item;
-import com.example.webpos.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Component;

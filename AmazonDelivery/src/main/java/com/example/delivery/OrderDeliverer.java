@@ -1,8 +1,8 @@
 package com.example.delivery;
 
-import com.example.order.Order;
-import com.example.order.Statuses;
-import com.example.webpos.model.Item;
+import com.example.model.Item;
+import com.example.model.Order;
+import com.example.model.Statuses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.messaging.Message;

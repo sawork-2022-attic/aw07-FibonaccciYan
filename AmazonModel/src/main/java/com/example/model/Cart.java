@@ -1,4 +1,4 @@
-package com.example.webpos.model;
+package com.example.model;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

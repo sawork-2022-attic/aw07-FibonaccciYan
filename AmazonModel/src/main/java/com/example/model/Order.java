@@ -1,6 +1,4 @@
-package com.example.order;
-
-import com.example.webpos.model.Item;
+package com.example.model;
 
 import java.util.ArrayList;
 import java.util.List;

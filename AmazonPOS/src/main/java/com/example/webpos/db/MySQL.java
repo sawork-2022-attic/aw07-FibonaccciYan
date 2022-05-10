@@ -1,7 +1,7 @@
 package com.example.webpos.db;
 
-import com.example.webpos.model.Cart;
-import com.example.webpos.model.Product;
+import com.example.model.Cart;
+import com.example.model.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
