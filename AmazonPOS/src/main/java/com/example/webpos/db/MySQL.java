@@ -1,6 +1,6 @@
 package com.example.webpos.db;
 
-import com.example.model.Cart;
+import com.example.webpos.model.Cart;
 import com.example.model.Product;
 import org.springframework.stereotype.Repository;
 
@@ -46,11 +46,13 @@ public class MySQL implements PosDB {
 
     private List<Product> parseMySQL() throws Exception {
 
+        System.out.println("MySQL");
         List<Product> showList = new ArrayList<>();
         Random random = new Random();
 
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/amazon?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8", "root", "ysy79891332");
+        System.out.println("connected");
         Statement stmt = connection.createStatement();
         String sql = "SELECT * FROM products WHERE imageURLHighRes != '' LIMIT 50;";
         ResultSet resultSet = stmt.executeQuery(sql);

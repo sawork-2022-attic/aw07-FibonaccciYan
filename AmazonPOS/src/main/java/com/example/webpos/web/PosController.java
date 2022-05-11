@@ -1,6 +1,6 @@
 package com.example.webpos.web;
 
-import com.example.model.Cart;
+import com.example.webpos.model.Cart;
 import com.example.webpos.biz.PosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,7 +62,8 @@ public class PosController {
 
     @GetMapping("/checkout")
     public String checkout(Model model) {
-        posService.checkout(cart);
+        posService.checkout(posService.getCart());
+        posService.newCart();
         return "redirect:/";
     }
 }

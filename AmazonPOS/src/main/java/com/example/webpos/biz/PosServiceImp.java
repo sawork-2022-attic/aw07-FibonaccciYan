@@ -1,6 +1,6 @@
 package com.example.webpos.biz;
 
-import com.example.model.Cart;
+import com.example.webpos.model.Cart;
 import com.example.model.Item;
 import com.example.model.Order;
 import com.example.model.Product;
@@ -49,12 +49,12 @@ public class PosServiceImp implements PosService, Serializable {
 
     @Override
     public void checkout(Cart cart) {
+        System.out.println(cart.toString());
 
         Order order = new Order(UUID.randomUUID().toString(), cart.getItems());
         System.out.println(order.getStatus() + " " + order.getUuid());
 
-        streamBridge.send("", order);
-
+        streamBridge.send("OrderDeliverer", order);
     }
 
     @Override

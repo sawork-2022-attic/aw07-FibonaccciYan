@@ -1,8 +1,13 @@
 package com.example.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
     String uuid, status;
     List<Item> items = new ArrayList<>();

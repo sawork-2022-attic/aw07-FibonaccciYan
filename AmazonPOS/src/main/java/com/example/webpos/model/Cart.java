@@ -1,5 +1,6 @@
-package com.example.model;
+package com.example.webpos.model;
 
+import com.example.model.Item;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;

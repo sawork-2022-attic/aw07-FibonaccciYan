@@ -1,1 +1,20 @@
-
+spring:
+  cloud:
+    function:
+      definition: orderDeliver
+    stream:
+      function:
+        bindings:
+          orderDeliver-in-0: OrderDeliverer
+      bindings:
+        order-declined:
+          destination: order-declined
+        order-approved:
+          destination: order-approved
+        OrderDeliverer:
+          destination: OrderDeliverer
+      rabbit:
+        bindings:
+          output:
+            consumer:
+              declare-exchange: false

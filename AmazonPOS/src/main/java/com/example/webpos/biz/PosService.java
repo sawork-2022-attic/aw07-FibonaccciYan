@@ -1,6 +1,6 @@
 package com.example.webpos.biz;
 
-import com.example.model.Cart;
+import com.example.webpos.model.Cart;
 import com.example.model.Product;
 
 import java.util.List;

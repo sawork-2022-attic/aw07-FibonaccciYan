@@ -21,13 +21,21 @@ public class OrderDeliverer implements Consumer<Order> {
 
     @Override
     public void accept(Order order) {
-        System.out.println(order.getStatus() + " " + order.getUuid());
+        System.out.println(order.getStatus() + " " + order.getUuid() + "\n" + order.getItems().toString());
 
-        for(Item item: order.getItems()) {
-            if(item.getQuantity() <= 0) {
-                order.setStatus(Statuses.DECLINED.name());
-                streamBridge.send("order-declined", message(order));
-                return;
+        if(order.getItems().isEmpty()){
+            order.setStatus(Statuses.DECLINED.name());
+            streamBridge.send("order-declined", message(order));
+            System.out.println(order.getStatus() + " " + order.getUuid());
+            return;
+        } else {
+            for (Item item : order.getItems()) {
+                if (item.getQuantity() <= 0) {
+                    order.setStatus(Statuses.DECLINED.name());
+                    streamBridge.send("order-declined", message(order));
+                    System.out.println(order.getStatus() + " " + order.getUuid());
+                    return;
+                }
             }
         }
         order.setStatus(Statuses.APPROVED.name());
